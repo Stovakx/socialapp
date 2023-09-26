@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../../states";
+import { setLogin } from "../../states/index";
 import Dropzone from "react-dropzone";
 import { FlexBetween } from "../../components/FlexBerween";
 
@@ -80,13 +80,14 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "Authorization": `Bearer `
-        },
-        body: JSON.stringify(values),
-      });
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization": `Bearer `, 
+      },
+      body: JSON.stringify(values),
+    });
+
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
