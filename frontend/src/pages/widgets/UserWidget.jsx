@@ -88,16 +88,24 @@ export default function UserWidget({ userId, picturePath }) {
           <Typography color={medium}>{occupation}</Typography>
         </Box>
       </Box>
+      <Divider />
       {/* third row */}
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
           <Typography color={medium}>Who's viewed your profile</Typography>
+          <Typography color={main} fontWeight="500">
+            {viewedProfile}
+          </Typography>
+        </FlexBetween>
+        <FlexBetween>
+          <Typography color={medium}>Impressions of your post</Typography>
           <Typography color={main} fontWeight="500">
             {impressions}
           </Typography>
         </FlexBetween>
       </Box>
       {/* fouth row */}
+      <Divider />
       <Box p="1rem 0">
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
           Social Profiles
