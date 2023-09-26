@@ -6,7 +6,7 @@ import {
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "../../components/UserImage";
-import { FlexBetween } from "../../components/FlexBerween";
+import { FlexBetween } from "../../components/FlexBetween";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useEffect, useState } from "react";

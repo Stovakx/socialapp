@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../states/index";
 import Dropzone from "react-dropzone";
-import { FlexBetween } from "../../components/FlexBerween";
+import { FlexBetween } from "../../components/FlexBetween";
 import { baseUrl } from "../../utils/serverUrl";
 
 const registerSchema = yup.object().shape({
