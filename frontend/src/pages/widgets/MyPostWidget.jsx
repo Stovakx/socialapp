@@ -33,12 +33,16 @@ export default function MyPostWidget({ picturePath }) {
   const [post, setPost] = useState("");
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
-  const token = useSelector((state) => state.user);
-  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const token = useSelector((state) => state.token);
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
+    console.log("_id:", _id);
+    console.log("post:", post);
+    console.log("image:", image);
+
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
@@ -49,13 +53,17 @@ export default function MyPostWidget({ picturePath }) {
 
     const response = await fetch(`${baseUrl}/posts`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     });
+    console.log(formData);
     const posts = await response.json();
     dispatch(setPosts({ posts }));
     setImage(null);
     setPost("");
+    console.log(posts);
   };
 
   return (
@@ -70,7 +78,7 @@ export default function MyPostWidget({ picturePath }) {
             width: "100%",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
-            padding: "1rem 2 rem",
+            padding: "1rem 1rem",
           }}
         />
       </FlexBetween>
@@ -97,7 +105,7 @@ export default function MyPostWidget({ picturePath }) {
                 >
                   <input {...getInputProps()} />
                   {!image ? (
-                    <p>Add image Here</p>
+                    <p>Add Image Here</p>
                   ) : (
                     <FlexBetween>
                       <Typography>{image.name}</Typography>
@@ -119,8 +127,9 @@ export default function MyPostWidget({ picturePath }) {
         </Box>
       )}
       <Divider sx={{ margin: "1.25rem 0" }} />
+
       <FlexBetween>
-        <FlexBetween gap="0.2rem" onClick={() => setImage(!isImage)}>
+        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
           <ImageOutlined sx={{ color: mediumMain }} />
           <Typography
             color={mediumMain}
@@ -129,36 +138,40 @@ export default function MyPostWidget({ picturePath }) {
             Image
           </Typography>
         </FlexBetween>
+
         {isNonMobileScreens ? (
           <>
-            <FlexBetween gap="0.25">
+            <FlexBetween gap="0.25rem">
               <GifBoxOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Clip</Typography>
             </FlexBetween>
-            <FlexBetween gap="0.25">
+
+            <FlexBetween gap="0.25rem">
               <AttachFileOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Attachment</Typography>
             </FlexBetween>
-            <FlexBetween gap="0.25">
+
+            <FlexBetween gap="0.25rem">
               <MicOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Audio</Typography>
             </FlexBetween>
           </>
         ) : (
-          <FlexBetween gap="0.25">
+          <FlexBetween gap="0.25rem">
             <MoreHorizOutlined sx={{ color: mediumMain }} />
           </FlexBetween>
         )}
+
         <Button
           disabled={!post}
           onClick={handlePost}
           sx={{
             color: palette.background.alt,
-            borderRadius: "3rem",
             backgroundColor: palette.primary.main,
+            borderRadius: "3rem",
           }}
         >
-          Post
+          POST
         </Button>
       </FlexBetween>
     </WidgetWrapper>

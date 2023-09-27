@@ -4,6 +4,7 @@ import UserWidget from "../widgets/UserWidget";
 import { useSelector } from "react-redux";
 import AdvertWidget from "../widgets/AdvertWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
+import AllPostsWidget from "../widgets/AllPostsWidget";
 
 export default function IndexPage() {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -26,7 +27,7 @@ export default function IndexPage() {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
         <MyPostWidget picturePath={picturePath}/>
-        {/* all posts here */}
+        <AllPostsWidget/>
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
