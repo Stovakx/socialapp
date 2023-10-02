@@ -21,9 +21,9 @@ export default function PostWidget({
   location,
   picturePath,
   userPicturePath,
-  likes,
+  likes = {},
   comments,
-}) {
+}){
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
@@ -34,7 +34,7 @@ export default function PostWidget({
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
-
+  console.log(isLiked);
   const patchLike = async () => {
     const response = await fetch(`${baseUrl}/posts/${postId}/like`, {
       method: "PATCH",
@@ -47,8 +47,6 @@ export default function PostWidget({
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
-
-
 
   return (
     <WidgetWrapper m="2rem 0">
