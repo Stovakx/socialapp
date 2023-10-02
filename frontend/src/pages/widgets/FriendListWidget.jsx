@@ -13,12 +13,16 @@ export default function FriendListWidget({ userId }) {
   const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
-    const response = await fetch(`${baseUrl}/user/${userId}/friends`, {
-      method: "GET",
-      headers: { Authorazition: `Beare ${token}` },
-    });
-    const data = await response.json();
-    dispatch(setFriends({ frineds: data }));
+    try {
+      const response = await fetch(`${baseUrl}/user/${userId}/friends`, {
+        method: "GET",
+        headers: { Authorazition: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      dispatch(setFriends({ frineds: data }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

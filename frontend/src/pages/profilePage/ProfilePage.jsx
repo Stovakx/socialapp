@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery, } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,6 +11,7 @@ export default function ProfilePage() {
   const [picturePath, setPicturePath] = useState(null);
   const [user, setUser] = useState(null);
   const { userId } = useParams();
+  const {_id} = useSelector((state)=> state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
@@ -36,7 +37,7 @@ export default function ProfilePage() {
 
   return (
     <Box>
-      <Navbar />
+      <Navbar userId={_id} />
       <Box
         width="100%"
         padding="2rem 6%"

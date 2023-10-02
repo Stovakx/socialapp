@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 import { FlexBetween } from "../../components/FlexBetween";
 import UserImage from "../../components/UserImage";
 
-export default function Navbar({userId, }){
+export default function Navbar({ userId }) {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,17 +41,18 @@ export default function Navbar({userId, }){
   const alt = theme.palette.background.alt;
 
   const fullName = `${user.firstName} ${user.lastName}`;
-
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-      <FlexBetween 
-        gap="1.75rem"
-        
-      >
-      <UserImage
-          image={user.picturePath}
-          onClick={() => navigate(`/profile/${userId}`)}
+      <FlexBetween gap="1.75rem">
+        <IconButton onClick={() => {
+              navigate(`/profile/${userId}`);
+            }}
+        >
+          <UserImage
+            image={user.picturePath}
+            
           />
+        </IconButton>
         <Typography
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
@@ -139,7 +140,6 @@ export default function Navbar({userId, }){
           minWidth="300px"
           backgroundColor={background}
         >
-
           {/* CLOSE ICON */}
           <Box display="flex" justifyContent="flex-end" p="1rem">
             <IconButton
@@ -202,4 +202,3 @@ export default function Navbar({userId, }){
     </FlexBetween>
   );
 }
-
