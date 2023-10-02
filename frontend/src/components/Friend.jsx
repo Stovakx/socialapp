@@ -24,7 +24,7 @@ export default function Friend({ friendId, name, subtitle, userPicturePath }) {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `${baseUrl}/users/${_id}/${friendId}`,
+      `${baseUrl}/user/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

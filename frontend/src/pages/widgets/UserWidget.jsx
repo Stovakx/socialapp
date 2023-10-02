@@ -33,7 +33,8 @@ export default function UserWidget({ userId, picturePath }) {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [userId, token]);
+
 
   if (!user) {
     return null;
@@ -48,6 +49,7 @@ export default function UserWidget({ userId, picturePath }) {
     impressions,
     friends,
   } = user;
+  
   return (
     <WidgetWrapper>
       <FlexBetween
@@ -71,7 +73,11 @@ export default function UserWidget({ userId, picturePath }) {
             >
               {firstName} {lastname}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            {user && (
+              <Typography color={medium}>
+                {user.friends.length} friends
+              </Typography>
+            )}
           </Box>
         </FlexBetween>
         <ManageAccountsOutlinedIcon />

@@ -4,7 +4,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Divider, Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Divider, Box, IconButton, Typography, useTheme, InputBase, Button} from "@mui/material";
 import Friend from "../../components/Friend";
 import { baseUrl } from "../../utils/serverUrl";
 import { FlexBetween } from "../../components/FlexBetween";
@@ -23,7 +23,8 @@ export default function PostWidget({
   userPicturePath,
   likes = {},
   comments,
-}){
+}) {
+  const [commentText, setCommentText] = useState("");
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
@@ -34,6 +35,29 @@ export default function PostWidget({
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+
+  const postComment = async () => {
+    const response = await fetch(`${baseUrl}/posts/${postId}/comment`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: commentText }),
+    });
+
+    if (response.ok) {
+      const updatedPost = await response.json();
+      // Aktualizujte stav komponenty nebo redux store podle potřeby
+      dispatch(setPost({ post: updatedPost }));
+      // Vyčistěte pole pro text komentáře
+      setCommentText("");
+      console.log(updatedPost);
+    } else {
+      // Zpracujte chybu, pokud se něco pokazilo při odesílání komentáře
+      console.error("Chyba při odesílání komentáře");
+    }
+  };
 
   const patchLike = async () => {
     const response = await fetch(`${baseUrl}/posts/${postId}/like`, {
@@ -46,7 +70,6 @@ export default function PostWidget({
     });
 
     const updatedPost = await response.json();
-    console.log(updatedPost)
     dispatch(setPost({ post: updatedPost }));
   };
 
@@ -106,6 +129,23 @@ export default function PostWidget({
             </Box>
           ))}
           <Divider />
+          <FlexBetween
+              margin="10px"
+              sx={{
+              width: "100%",
+              backgroundColor: palette.neutral.light,
+              borderRadius: "2rem",
+              padding: "0.2rem 1rem",    
+            }}
+          >  
+          <InputBase
+            type="text"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Send a response..."
+          />
+          <Button className="commentBtn" onClick={postComment}>Odeslat</Button>
+          </FlexBetween>
         </Box>
       )}
     </WidgetWrapper>
