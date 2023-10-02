@@ -24,8 +24,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "../../states/index";
 import { useNavigate } from "react-router-dom";
 import { FlexBetween } from "../../components/FlexBetween";
+import UserImage from "../../components/UserImage";
 
-export default function Navbar(){
+export default function Navbar({userId, picturePath}){
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,7 +46,13 @@ export default function Navbar(){
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-      <FlexBetween gap="1.75rem">
+      <FlexBetween 
+        gap="1.75rem"
+        onClick={() => navigate(`/profile/${userId}`)}
+      >
+      <UserImage
+          image={picturePath}
+          />
         <Typography
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
@@ -133,6 +140,7 @@ export default function Navbar(){
           minWidth="300px"
           backgroundColor={background}
         >
+
           {/* CLOSE ICON */}
           <Box display="flex" justifyContent="flex-end" p="1rem">
             <IconButton

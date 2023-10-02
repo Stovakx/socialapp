@@ -39,9 +39,6 @@ export default function MyPostWidget({ picturePath }) {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
-    console.log("_id:", _id);
-    console.log("post:", post);
-    console.log("image:", image);
 
     const formData = new FormData();
     formData.append("userId", _id);
@@ -58,12 +55,10 @@ export default function MyPostWidget({ picturePath }) {
       },
       body: formData,
     });
-    console.log(formData);
     const posts = await response.json();
     dispatch(setPosts({ posts }));
     setImage(null);
     setPost("");
-    console.log(posts);
   };
 
   return (

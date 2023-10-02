@@ -17,7 +17,7 @@ export default function AllPostsWidget({ userId, isProfile = false }) {
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
-  console.log("getPosts data:", getPosts);
+ 
   const getUserPosts = async () => {
     const response = await fetch(`${baseUrl}/posts/${userId}/posts`, {
       method: "GET",
@@ -26,7 +26,7 @@ export default function AllPostsWidget({ userId, isProfile = false }) {
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
-  console.log("getUserPosts", getUserPosts);
+  
 
   useEffect(() => {
     if (isProfile) {

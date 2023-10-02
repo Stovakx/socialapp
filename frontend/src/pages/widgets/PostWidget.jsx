@@ -34,7 +34,7 @@ export default function PostWidget({
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
-  console.log(isLiked);
+
   const patchLike = async () => {
     const response = await fetch(`${baseUrl}/posts/${postId}/like`, {
       method: "PATCH",
@@ -44,7 +44,9 @@ export default function PostWidget({
       },
       body: JSON.stringify({ userId: loggedInUserId }),
     });
+
     const updatedPost = await response.json();
+    console.log(updatedPost)
     dispatch(setPost({ post: updatedPost }));
   };
 
