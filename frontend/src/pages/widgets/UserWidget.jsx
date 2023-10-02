@@ -49,7 +49,6 @@ export default function UserWidget({ userId, picturePath }) {
     impressions,
     friends,
   } = user;
-  
   return (
     <WidgetWrapper>
       <FlexBetween
