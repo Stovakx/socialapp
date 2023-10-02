@@ -47,7 +47,8 @@ export default function PostWidget({
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
-  console.log("Likes:", likes); 
+
+
 
   return (
     <WidgetWrapper m="2rem 0">

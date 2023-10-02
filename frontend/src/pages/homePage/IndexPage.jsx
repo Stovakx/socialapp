@@ -27,7 +27,7 @@ export default function IndexPage() {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
         <MyPostWidget picturePath={picturePath}/>
-        <AllPostsWidget/>
+        <AllPostsWidget userId={_id} />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../states";
 import PostWidget from "./PostWidget";
 
-export default function AllPostsWidget({ userId, isProfile = false}) {
+export default function AllPostsWidget({ userId, isProfile = false }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
@@ -35,10 +35,10 @@ export default function AllPostsWidget({ userId, isProfile = false}) {
       getPosts();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  
+
   return (
     <>
-     {posts.map(
+      {posts.map(
         ({
           _id,
           userId,
@@ -51,7 +51,7 @@ export default function AllPostsWidget({ userId, isProfile = false}) {
           likes,
           comments,
         }) => (
-           <PostWidget
+          <PostWidget
             key={_id}
             postId={_id}
             postUserId={userId}
