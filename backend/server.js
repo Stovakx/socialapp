@@ -14,16 +14,14 @@ import userRoutes from './routes/user.js';
 import postsRouter from './routes/posts.js';
 import { verifyToken } from './middleware/auth.js';
 import {createPost} from './controllers/posts.js'
-/* import User from './models/user.js';
-import Post from './models/post.js';
-import {users, posts} from './data/index.js'; */
+
 /* middlewares confinguration */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:3000', 
+    origin: 'https://socialapp-two.vercel.app/', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   };
 app.use(express.json());
@@ -61,7 +59,5 @@ mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
 }).then(()=>{
     app.listen(PORT, ()=> console.log(`Server PORT: ${PORT}`));
-/*  inserted data (onetime!!)
-    User.insertMany(users);
-    Post.insertMany(posts); */
+
 }).catch((error)=> console.log(`${error} dit not connect`));
