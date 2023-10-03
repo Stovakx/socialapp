@@ -42,7 +42,7 @@ export default function Navbar({ userId }) {
 
   const fullName = `${user.firstName} ${user.lastName}`;
   return (
-    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+    <FlexBetween padding="1rem 2%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
         <IconButton onClick={() => {
               navigate(`/profile/${userId}`);
