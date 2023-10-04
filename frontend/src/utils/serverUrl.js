@@ -1,1 +1,1 @@
-export const  baseUrl = "https://socapp-backend-43c1ec990516.herokuapp.com"
+export const  baseUrl ="https://socapp-backend-43c1ec990516.herokuapp.com"
