@@ -21,8 +21,9 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 const corsOptions = {
-  origin: "https://socialapp-5jlwp7lm9-stovakxs-projects.vercel.app",
+  origin: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials:true,
 };
 app.use(express.json());
 app.use(helmet());
