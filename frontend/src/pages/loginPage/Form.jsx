@@ -220,6 +220,7 @@ const Form = () => {
               onChange={handleChange}
               value={values.email}
               name="email"
+              autoComplete="on"
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 4" }}
@@ -231,6 +232,7 @@ const Form = () => {
               onChange={handleChange}
               value={values.password}
               name="password"
+              autoComplete="on"
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
