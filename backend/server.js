@@ -25,13 +25,13 @@ const corsOptions = {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials:true,
 };
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extendend: true }));
 app.use(bodyParser.urlencoded({ limit: "3Omb", extended: true }));
-app.use(cors(corsOptions));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 //file storage
