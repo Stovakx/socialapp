@@ -1,19 +1,19 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import multer from 'multer';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import {register} from './controllers/auth.js';
-import authRoutes from './routes/auth.js';
-import userRoutes from './routes/user.js';
-import postsRouter from './routes/posts.js';
-import { verifyToken } from './middleware/auth.js';
-import {createPost} from './controllers/posts.js'
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import multer from "multer";
+import helmet from "helmet";
+import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
+import { register } from "./controllers/auth.js";
+import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/user.js";
+import postsRouter from "./routes/posts.js";
+import { verifyToken } from "./middleware/auth.js";
+import { createPost } from "./controllers/posts.js";
 
 /* middlewares confinguration */
 const __filename = fileURLToPath(import.meta.url);
@@ -21,43 +21,45 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 const corsOptions = {
-    origin: 'https://socialapp-5jlwp7lm9-stovakxs-projects.vercel.app/', 
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  };
+  origin: "https://socialapp-5jlwp7lm9-stovakxs-projects.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+};
 app.use(express.json());
-app.use(helmet())
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin'}));
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-app.use(bodyParser.json({limit: "30mb", extendend:true}));
-app.use(bodyParser.urlencoded({limit: '3Omb', extended:true}));
+app.use(bodyParser.json({ limit: "30mb", extendend: true }));
+app.use(bodyParser.urlencoded({ limit: "3Omb", extended: true }));
 app.use(cors(corsOptions));
-app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 //file storage
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, "public/assets");
-    },
-    filename: function (req, file, cb) { 
-        cb(null, file.originalname);
-     }
+  destination: function (req, file, cb) {
+    cb(null, "public/assets");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
 });
 
-const upload = multer({ storage});
+const upload = multer({ storage });
 
 //file routes
-app.post('/auth/register', upload.single('picture'), register);
-app.post('/posts', verifyToken, upload.single('picture'), createPost);
+app.post("/auth/register", upload.single("picture"), register);
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
 //routes
-app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
-app.use('/posts', postsRouter)
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/posts", postsRouter);
 
 //mongoose setup
 const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL, {
+mongoose
+  .connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
-}).then(()=>{
-    app.listen(PORT, ()=> console.log(`Server PORT: ${PORT}`));
-
-}).catch((error)=> console.log(`${error} dit not connect`));
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server PORT: ${PORT}`));
+  })
+  .catch((error) => console.log(`${error} dit not connect`));
