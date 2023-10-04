@@ -16,10 +16,12 @@ import { verifyToken } from "./middleware/auth.js";
 import { createPost } from "./controllers/posts.js";
 
 /* middlewares confinguration */
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 const corsOptionsBackend = {
     origin:"https://socapp-backend-43c1ec990516.herokuapp.com",
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
