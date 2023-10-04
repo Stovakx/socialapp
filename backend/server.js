@@ -20,12 +20,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
-const corsOptions = {
-  origin: "https://socialapp-5vq3rviov-stovakxs-projects.vercel.app/",
+const corsOptionsBackend = {
+    origin:"https://socapp-backend-43c1ec990516.herokuapp.com",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    credentials: true,
+}
+const corsOptionsFrontend = {
+  origin: "https://socialapp-5vq3rviov-stovakxs-projects.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptionsFrontend,corsOptionsBackend));
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
