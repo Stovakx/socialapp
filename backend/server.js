@@ -29,7 +29,7 @@ const corsOptionsBackend = {
   credentials: true,
 };
 const corsOptionsFrontend = {
-  origin: "https://socialapp-two.vercel.app",
+  origin: "https://socialapp-git-main-stovakxs-projects.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
