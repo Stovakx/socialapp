@@ -22,13 +22,14 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+//přepsat url do .env, aby nebyli vidět!!!
 const corsOptionsBackend = {
-    origin:"https://socapp-backend-43c1ec990516.herokuapp.com",
+    origin:"https://mern-social-app-4d132c8d5f6e.herokuapp.com",
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
     credentials: true,
 }
 const corsOptionsFrontend = {
-  origin: "https://socialapp-5vq3rviov-stovakxs-projects.vercel.app",
+  origin: "https://socialapp-b9opth1ea-stovakxs-projects.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
