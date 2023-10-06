@@ -24,16 +24,16 @@ const app = express();
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //přepsat url do .env, aby nebyli vidět!!!
 const corsOptionsBackend = {
-    origin:"https://mern-social-app-4d132c8d5f6e.herokuapp.com",
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-    credentials: true,
-}
+  origin: "https://mern-social-app-4d132c8d5f6e.herokuapp.com",
+  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  credentials: true,
+};
 const corsOptionsFrontend = {
   origin: "https://socialapp-two.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
-app.use(cors(corsOptionsFrontend,corsOptionsBackend));
+app.use(cors(corsOptionsFrontend, corsOptionsBackend));
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
